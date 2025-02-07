@@ -1,14 +1,11 @@
 # 🎮 Matrix-Game  
 
-🖥️ **Ein einfaches Spiel in PowerShell**, das ich in meiner Freizeit bei der Arbeit erstelle.  
+🖥️ **Ein Spiel das ich mit **Powershell** in meiner Freizeit, auf Der Arbeit am erstellen bin.
 
-## 🚀 Features  
-✔ Erstellt in **PowerShell**  
-✔ Interaktive Abfragen  
-✔ Einfach zu nutzen  
 
 ## 📜 Installation  
 1. Lade die Datei herunter oder klone das Repository:  
-   ```powershell
-   git clone https://github.com/MetoRIZZ/Matrix-Game.git
-![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white)
+   ```
+   u need to copy the code and paste it into an enviorment like Powershell ISE or Visual Studio
+<img src="https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white" width="200" height="50">
+
