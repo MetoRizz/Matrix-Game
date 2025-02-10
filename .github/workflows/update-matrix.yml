@@ -18,17 +18,18 @@ jobs:
           echo "# Matrix Game Version $VERSION" > MatrixV1.PS1
           cat MatrixV1.PS1
 
-     - name: Commit and Push Changes
+    - name: Commit and Push Changes
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   run: |
     git config --global user.name 'github-actions'
     git config --global user.email 'github-actions@github.com'
-    
-    git checkout main  # Wechsel zurück auf den Main-Branch
+
+    git fetch origin main  # Holt die neuesten Änderungen aus main
+    git checkout main  # Wechselt auf den main-Branch
+    git merge --ff-only HEAD@{1} || echo "No fast-forward merge possible"
+
     git add MatrixV1.PS1
     git commit -m "Update MatrixV1.PS1 to version $VERSION" || echo "No changes to commit"
     
-    git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main
-
-
+    git push origin main
