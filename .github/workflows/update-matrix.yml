@@ -11,10 +11,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       with:
-        ref: MatrixGameV1.2.1
+        ref: ${{ github.event.release.tag_name }}
 
     - name: Set version
-      run: echo "VERSION=MatrixGameV1.2.1" >> $GITHUB_ENV
+      run: echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
 
     - name: Update MatrixV1.PS1
       run: |
