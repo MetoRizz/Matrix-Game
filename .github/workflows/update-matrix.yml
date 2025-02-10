@@ -18,8 +18,8 @@ jobs:
 
     - name: Update MatrixV1.PS1
       run: |
-        echo "# Matrix Game Version ${{ env.VERSION }}" > MatrixV1.PS1
-        cat MatrixV1.PS1
+        curl -L -o MatrixV1.PS1 https://github.com/MetoRizz/Matrix-Game/releases/download/${{ github.event.release.tag_name }}/Matrix.abfrage.von.Metehan.K.ps1
+        echo "# Matrix Game Version ${{ env.VERSION }}" >> MatrixV1.PS1
 
     - name: Commit and push changes
       env:
