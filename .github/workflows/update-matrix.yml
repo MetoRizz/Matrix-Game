@@ -1,0 +1,28 @@
+name: Update MatrixV1 on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-matrix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Update MatrixV1.ps1 Version
+        run: |
+          VERSION=${{ github.event.release.tag_name }}
+          echo "# Matrix Game Version $VERSION" > MatrixV1.PS1
+          cat MatrixV1.PS1
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add MatrixV1.PS1
+          git commit -m "Update MatrixV1.PS1 to version $VERSION"
+          git push
+
