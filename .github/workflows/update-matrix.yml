@@ -7,29 +7,24 @@ on:
 jobs:
   update-matrix:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: MatrixGameV1.2.1
 
-      - name: Update MatrixV1.ps1 Version
-        run: |
-          VERSION=${{ github.event.release.tag_name }}
-          echo "# Matrix Game Version $VERSION" > MatrixV1.PS1
-          cat MatrixV1.PS1
+    - name: Set version
+      run: echo "VERSION=MatrixGameV1.2.1" >> $GITHUB_ENV
 
-    - name: Commit and Push Changes
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  run: |
-    git config --global user.name 'github-actions'
-    git config --global user.email 'github-actions@github.com'
+    - name: Update MatrixV1.PS1
+      run: |
+        echo "# Matrix Game Version ${{ env.VERSION }}" > MatrixV1.PS1
+        cat MatrixV1.PS1
 
-    git fetch origin main  # Holt die neuesten Änderungen aus main
-    git checkout main  # Wechselt auf den main-Branch
-    git merge --ff-only HEAD@{1} || echo "No fast-forward merge possible"
-
-    git add MatrixV1.PS1
-    git commit -m "Update MatrixV1.PS1 to version $VERSION" || echo "No changes to commit"
-    
-    git push origin main
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add MatrixV1.PS1
+        git commit -m "Update MatrixV1.PS1 to version ${{ env.VERSION }}"
+        git push origin HEAD:main
