@@ -14,7 +14,9 @@ jobs:
         ref: ${{ github.event.release.tag_name }}
 
     - name: Set version
-      run: echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+      run: |
+        echo "VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+        cat $GITHUB_ENV  # Debugging: Zeigt, ob VERSION wirklich gesetzt wurde
 
     - name: Update MatrixV1.PS1
       run: |
@@ -28,5 +30,5 @@ jobs:
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         git add MatrixV1.PS1
-        git commit -m "Update MatrixV1.PS1 to version ${{ env.VERSION }}"
+        git commit -m "Update MatrixV1.PS1 to version ${{ github.event.release.tag_name }}"
         git push origin HEAD:main
